@@ -23,7 +23,7 @@ print('trees: len', len(trees))
 
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=""))
+    # await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=""))
     log('we have logged in as {0.user}'.format(bot))
 
 
@@ -31,17 +31,17 @@ async def on_ready():
 async def on_message(message):
     if message.author == bot.user:
         return
-    if message.content.startswith('!treeteller'):
+    if '!treeteller' in message.content.lower():
         tree = trees[random.randint(0, len(trees))]
 
         name = tree[1] if tree[1] != '' else "Unknown"
-        type = tree[2] if tree[2] != '' else "Unknown"
+        species = tree[2] if tree[2] != '' else "Unknown"
         age = tree[3] if tree[3] != '' else "Unknown"
         location = tree[4] if tree[4] != '' else "Unknown"
         description = tree[5] if tree[5] != '' else "Unknown"
 
         embed = discord.Embed(title=name, colour=discord.Colour.random())
-        embed.add_field(name="Type", value=type, inline=False)
+        embed.add_field(name="Species", value=species, inline=False)
         embed.add_field(name="Age", value=age, inline=False)
         embed.add_field(name="Location", value=location, inline=False)
         embed.add_field(name="Description", value=description, inline=False)
