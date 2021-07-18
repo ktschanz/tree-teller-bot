@@ -38,7 +38,7 @@ async def on_message(message):
         species = tree[2] if tree[2] != '' and tree[2] != '-' else "Unknown"
         age = tree[3] if tree[3] != '' and tree[3] != '-' else "Unknown"
         location = tree[4] if tree[4] != '' and tree[4] != '-' else "Unknown"
-        description = tree[5] if tree[5] != '' and tree[5] != '-' else "Unknown"
+        description = tree[6] if tree[6] != '' and tree[6] != '-' else "Unknown"
 
         embed = discord.Embed(title=name, colour=discord.Colour.random())
         embed.add_field(name="Species", value=species, inline=False)
