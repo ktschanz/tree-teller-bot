@@ -38,7 +38,7 @@ async def on_message(message):
             return
         if '!treeteller' in message.content.lower():
             log(f'received !species request from {message.author}')
-            tree = trees[random.randint(0, len(trees))]
+            tree = trees[random.randint(0, len(trees)-1)]
 
             name = tree[1] if tree[1] != '' and tree[1] != '-' else "Unknown"
             species = tree[2] if tree[2] != '' and tree[2] != '-' else "Unknown"
@@ -54,7 +54,7 @@ async def on_message(message):
             await message.channel.send(embed=embed)
         if '!species' in message.content.lower():
             log(f'received !species request from {message.author}')
-            species = speciess[random.randint(0, len(speciess))]
+            species = speciess[random.randint(0, len(speciess)-1)]
 
             name = species[0] if species[0] != '' and species[0] != '-' else "Unknown"
             status = species[1] if species[1] != '' and species[1] != '-' else "Unknown"
