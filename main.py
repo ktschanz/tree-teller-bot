@@ -16,9 +16,12 @@ args = parser.parse_args()
 bot = commands.Bot(command_prefix='!')
 
 trees = file_utils.read_csv(config['trees_path'])
+speciess = file_utils.read_csv(config['species_path'])
 
 print('trees:', trees)
 print('trees: len', len(trees))
+print('species:', speciess)
+print('species: len', len(speciess))
 
 
 @bot.event
@@ -45,6 +48,23 @@ async def on_message(message):
         embed.add_field(name="Age", value=age, inline=False)
         embed.add_field(name="Location", value=location, inline=False)
         embed.add_field(name="Description", value=description, inline=False)
+        await message.channel.send(embed=embed)
+    if '!species' in message.content.lower():
+        species = speciess[random.randint(0, len(speciess))]
+
+        name = species[0] if species[0] != '' and species[0] != '-' else "Unknown"
+        status = species[1] if species[1] != '' and species[1] != '-' else "Unknown"
+        sci_name = species[2] if species[2] != '' and species[2] != '-' else "Unknown"
+        size = species[3] if species[3] != '' and species[3] != '-' else "Unknown"
+        habitat = species[4] if species[4] != '' and species[4] != '-' else "Unknown"
+        image = species[5] if species[5] != '' and species[5] != '-' else "Unknown"
+
+        embed = discord.Embed(title=name, colour=discord.Colour.random())
+        embed.set_image(url=image)
+        embed.add_field(name="Status", value=status, inline=False)
+        embed.add_field(name="Latin Name", value=sci_name, inline=False)
+        embed.add_field(name="Size", value=size, inline=False)
+        embed.add_field(name="Habitat", value=habitat, inline=False)
         await message.channel.send(embed=embed)
 
 if args.test:

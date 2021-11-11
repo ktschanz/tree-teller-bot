@@ -9,4 +9,5 @@ with open(basepath + '/config.yaml', 'r') as ymlfile:
     config = yaml.load(ymlfile, Loader=yaml.FullLoader)
 
 config['trees_path'] = basepath + '/trees.csv'
+config['species_path'] = basepath + '/species.csv'
 
