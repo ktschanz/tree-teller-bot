@@ -18,10 +18,10 @@ bot = commands.Bot(command_prefix='!')
 trees = file_utils.read_csv(config['trees_path'])
 speciess = file_utils.read_csv(config['species_path'])
 
-print('trees:', trees)
-print('trees: len', len(trees))
-print('species:', speciess)
-print('species: len', len(speciess))
+log('trees:', trees)
+log('trees: len', len(trees))
+log('species:', speciess)
+log('species: len', len(speciess))
 
 
 @bot.event
@@ -35,6 +35,7 @@ async def on_message(message):
     if message.author == bot.user:
         return
     if '!treeteller' in message.content.lower():
+        log(f'received !species request from {message.author}')
         tree = trees[random.randint(0, len(trees))]
 
         name = tree[1] if tree[1] != '' and tree[1] != '-' else "Unknown"
@@ -50,6 +51,7 @@ async def on_message(message):
         embed.add_field(name="Description", value=description, inline=False)
         await message.channel.send(embed=embed)
     if '!species' in message.content.lower():
+        log(f'received !species request from {message.author}')
         species = speciess[random.randint(0, len(speciess))]
 
         name = species[0] if species[0] != '' and species[0] != '-' else "Unknown"
